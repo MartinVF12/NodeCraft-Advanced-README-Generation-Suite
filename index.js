@@ -44,7 +44,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'questions',
+        name: 'username', // Updated from 'questions' to 'username'
         message: 'Enter your GitHub username:',
     },
     {
