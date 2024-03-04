@@ -1,8 +1,10 @@
-// TODO: Include packages needed for this application
+// Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+// Import the generateMarkdown function
+const generateMarkdown = require("./generateMarkdown");
 
-// TODO: Create an array of questions for user input
+// Create an array of questions for user input
 const questions = [
     {
         type: 'input',
@@ -52,60 +54,20 @@ const questions = [
     },
 ];
 
-// TODO: Create a function to write README file
+// Create a function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
         err ? console.log(err) : console.log('Successfully created README.md!')
     );
 }
 
-// TODO: Create a function to initialize app
+// Create a function to initialize app
 function init() {
     inquirer.prompt(questions).then((answers) => {
-        const readmeContent = generateReadme(answers);
+        // Use the generateMarkdown function to create the content for README
+        const readmeContent = generateMarkdown(answers);
         writeToFile('README.md', readmeContent);
     });
-}
-
-// This is an additional function to generate the README content based on user responses.
-function generateReadme(answers) {
-    return `
-  # ${answers.title}
-  
-  ## Description
-  ${answers.description}
-  
-  ## Table of Contents
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [License](#license)
-  - [Contributing](#contributing)
-  - [Tests](#tests)
-  - [Questions](#questions)
-  
-  ## Installation
-  \`\`\`
-  ${answers.installation}
-  \`\`\`
-  
-  ## Usage
-  ${answers.usage}
-  
-  ## License
-  This project is licensed under the ${answers.license} license.
-  
-  ## Contributing
-  ${answers.contributing}
-  
-  ## Tests
-  \`\`\`
-  ${answers.tests}
-  \`\`\`
-  
-  ## Questions
-  For questions, please contact me at ${answers.email}.
-  GitHub: [${answers.questions}](https://github.com/${answers.questions})
-  `;
 }
 
 // Function call to initialize app
